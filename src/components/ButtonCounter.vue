@@ -3,8 +3,10 @@
     <h1>{{ msg }} {{ count }} </h1>
     <h2 style="text-align:center">Is the counter "even" or "odd"? </h2>
     <h2 style="text-align:center">{{ evenOrOdd }}</h2>
-    <md-button class="md-raised md-primary" v-on:click="increment">INNKREMENTER MEG!</md-button>
-    <md-button class="md-raised md-accent" v-on:click="decrement">DEKREMENTER MEG!</md-button>
+    <div class="flexRow">
+      <md-button class="md-raised md-primary" v-on:click="increment">Increment</md-button>
+      <md-button class="md-raised md-accent" v-on:click="decrement">Decrement</md-button>
+    </div>
   </div>
 </template>
 
@@ -33,7 +35,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .md-button {
-        margin: 0;
+    .flexRow {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
     }
 </style>

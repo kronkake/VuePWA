@@ -17,12 +17,17 @@ export default {
 </script>
 
 <style>
+  * {
+    line-height: 1em;
+  }
   #app {
     display:  flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
     justify-content: center;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   .fade-enter-active {
     transition: all 0.4s ease;

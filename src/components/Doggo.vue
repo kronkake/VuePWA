@@ -1,8 +1,11 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <md-button v-on:click="fetchNewDog">Click to see a new good doggo</md-button>
-    <img v-if="dogUrl" :src="dogUrl"></img>
+    <div class="flexRow">
+      <md-button class="md-raised md-primary" v-on:click="fetchPrevDog">Prev good Doggo</md-button>
+      <md-button class="md-raised md-accent" v-on:click="fetchNextDog">Next good Doggo</md-button>
+    </div>
+    <img id="doggoImage" ref="doggoImage" v-if="dogUrls" :src="dogUrls[dogImageIndex]"></img>
     <span v-if="loading">{{ lasteText }}</span>
   </div>
 </template>
@@ -14,44 +17,52 @@ export default {
   name: 'Doggo',
   data () {
     return {
-      msg: 'Look at all those cute doggies!',
+      msg: 'Welcome to Labrador heaven!',
+      lasteText: 'Laster nytt bilde!',
       loading: false,
-      lasteText: 'Laster nytt bilde!'
+      dogImageIndex: 20
     }
   },
   mounted: function() {
-    if (!this.dogUrl) {
-        this.fetchNewDog()
-    }
+    this.setUrls();
   },
   computed: {
     ...mapGetters({
-      dogUrl: 'url',
+      dogUrls: 'urls'
     })
   },
   methods: {
       ...mapActions([ 
-          'setUrl'
+          'setUrls'
       ]),
-      fetchNewDog: function() {
-          this.loading = true
-          this.get('https://dog.ceo/api/breeds/image/random')
-          .then((data) => { 
-              this.setUrl(data.message)
-              this.loading = false
-        } ).catch((exp) => {
-              this.lasteText = 'Noe gikk galt.'
-              console.error(exp)
-        })
-    },
-    get: async function(url) {
-      const response = await fetch(url)
-      const data = await response.json()
-      return data
-    }
-      
-  }
+      fetchNextDog: function() {
+        if (this.loading) { return }
 
+        this.updateImageLoading()
+
+        this.dogImageIndex++
+        if (this.dogImageIndex === this.dogUrls.length) {
+          this.dogImageIndex = 0
+        }
+      },
+      fetchPrevDog: function() {
+        if (this.loading) { return }
+
+        this.updateImageLoading()
+
+        this.dogImageIndex--
+        if (this.dogImageIndex < 0) {
+          this.dogImageIndex = this.dogUrls.length - 1 
+        }
+      },
+      updateImageLoading: function() {
+        if (!this.$refs.doggoImage) { this.loading = false; return }
+        this.loading = true
+        this.$refs.doggoImage.onload = () => {
+        this.loading = false
+      }
+    }
+  }
 }
 </script>
 
@@ -61,5 +72,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .flexRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 </style>

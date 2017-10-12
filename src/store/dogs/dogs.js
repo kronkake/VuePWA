@@ -1,7 +1,8 @@
 // root state object.
 // each Vuex instance is just a single state tree.
 const state = {
-    url: undefined
+    urls: [],
+    loadingDogs: false
   }
   
   // mutations are operations that actually mutates the state.
@@ -10,20 +11,24 @@ const state = {
   // mutations must be synchronous and can be recorded by plugins
   // for debugging purposes.
   const mutations = {
-    setUrl (state, value) {
-        state.url = value
-    }
+    setUrls (state, value) {
+        state.urls = value
+    },
   }
   
   // actions are functions that cause side effects and can involve
   // asynchronous operations.
   const actions = {
-    setUrl: ({ commit }, value) => commit('setUrl', value),
+    async setUrls ({ commit }) {
+      const response = await fetch('https://dog.ceo/api/breed/labrador/images')
+      const dogs = await response.json()
+      commit('setUrls', dogs.message)
+    }
   }
   
   // getters are functions
   const getters = {
-    url: state => state.url
+    urls: state => state.urls,
   }
   
   // A Vuex instance is created by combining the state, mutations, actions,
