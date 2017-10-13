@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <MainHeader></MainHeader>
-    <transition name="fade">
-      <router-view></router-view>
-    </transition>
+    <main>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
+    </main>
   </div>
 </template>
 

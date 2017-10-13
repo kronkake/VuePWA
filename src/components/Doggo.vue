@@ -19,12 +19,14 @@ export default {
     return {
       msg: 'Welcome to Labrador heaven!',
       lasteText: 'Laster nytt bilde!',
-      loading: false,
+      loading: true,
       dogImageIndex: 20
     }
   },
   mounted: function() {
-    this.setUrls();
+    this.setUrls().then(() => {
+      this.loading = false
+    })
   },
   computed: {
     ...mapGetters({

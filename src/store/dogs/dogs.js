@@ -23,6 +23,7 @@ const state = {
       const response = await fetch('https://dog.ceo/api/breed/labrador/images')
       const dogs = await response.json()
       commit('setUrls', dogs.message)
+      return dogs
     }
   }
   

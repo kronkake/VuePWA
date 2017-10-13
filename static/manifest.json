@@ -1,6 +1,9 @@
 {
   "name": "Vue Progressive Web App",
   "short_name": "VuePWA",
+  "description": "Kickass Example PWA",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
   "icons": [{
     "src": "images/favicon-white-on-orange-128.jpg",
       "sizes": "128x128",
