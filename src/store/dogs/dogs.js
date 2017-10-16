@@ -12,7 +12,7 @@ const state = {
   // for debugging purposes.
   const mutations = {
     setUrls (state, value) {
-        state.urls = value
+        state.urls = value.slice(10,60)
     },
   }
   
