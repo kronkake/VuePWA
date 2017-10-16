@@ -2,6 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -70,6 +71,11 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
-  }
+    ],
+  },
+  plugins: [
+    new ServiceWorkerWebpackPlugin({
+      entry: './service-worker.js',
+    })
+  ]
 }
