@@ -74,6 +74,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 30px;
   }
   .flexRow {
     display: flex;
